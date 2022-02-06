@@ -44,16 +44,17 @@ jobs:
 
     - run: poetry install
 
-  # TODO
-  # deploy:
-  #   runs-on: ubuntu-latest
-  #   needs: [build-node, build-python)
-  #   if: github.ref == 'refs/heads/master'
+    # TODO lint and test
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build-node, build-python)
+    if: github.ref == 'refs/heads/master'
     
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - uses: akhileshns/heroku-deploy@v3.12.12
-  #       with:
-  #         heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-  #         heroku_app_name: "fringuante-maison-12988"
-  #         heroku_email: "naslundx@gmail.com"
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "numbersincontext"
+          heroku_email: "naslundx@gmail.com"

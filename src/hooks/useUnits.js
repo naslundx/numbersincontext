@@ -4,7 +4,7 @@ import useApi from "./useApi";
 const useUnits = () => {
     const [units, call] = useApi('/api/units');
 
-    useEffect(call, []);    
+    useEffect(call, [call]);    
 
     return units;
 }
