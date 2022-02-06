@@ -1,4 +1,5 @@
 import json
+import os
 from flask import Flask, render_template, request
 from backend import Database, search
 
@@ -37,4 +38,4 @@ def hello():
 print("Starting Flask!")
 
 app.debug = True
-app.run(host="0.0.0.0")
+app.run(host="0.0.0.0", port=os.environ.get("PORT", "5000"))
