@@ -100,8 +100,21 @@ def fill_database(db_string = "example.db"):
     _run(db_string, """
         INSERT INTO number(value, unittypeid, description)
         VALUES 
-            (1, 1, 'A single item'),
             (11, 1, 'Number of players in a football team'),
-            (100, 1, 'Temperature at which water boils'),
-            (1000, 1, 'Distance 1 KM apart');
+            (100, 1, 'Temperature (C) at which water boils'),
+            (1605430, 1, 'Population of Stockholm'),
+            (583056, 1, 'Population of Göteborg'),
+            (1412600000, 1, 'Population of China'),
+            (333186076, 1, 'Population of USA'),
+            (125440000, 1, 'Population of Japan'),
+            (67081234, 1, 'Population of UK'),
+            (10449381, 1, 'Population of Sweden'),
+            (888005, 1, 'Population of Cyprus'),
+            (53686, 1, 'Population of Faroe Islands'),
+            (825, 1, 'Population of Vatican City'),
+            (397, 1, 'Distance between Stockholm and Göteborg in KM'),
+            (64, 1, 'Distance between Stockholm and Uppsala in KM'),
+            (32, 1, 'Number of pieces on a chessboard'),
+            (11700, 1, 'Years since last ice age'),
+            (233, 1, 'Years since the French revolution');
     """)
