@@ -1,4 +1,5 @@
 import useSearch from "../hooks/useSearch"
+import "./results.css"
 
 const ResultItem = ({ data }) => {
     return (
@@ -10,7 +11,7 @@ const Results = ({ searchTerms }) => {
     const searchResults = useSearch(searchTerms);
 
     return (
-        <div className="result">
+        <div className="result transparentbox">
             {searchResults.map(e => <ResultItem data={e} />)}
         </div>
     )

@@ -2,9 +2,11 @@ import { useCallback, useState } from 'react';
 import './App.css';
 import Search from '../search'
 import Results from '../results'
+import Title from '../title'
+import Footer from '../footer'
 
 function App() {
-  const [searchTerms, setSearchTerms] = useState({value: '', unit: '1'});
+  const [searchTerms, setSearchTerms] = useState({value: '0', unit: 'none'});
 
   const handleChange = useCallback(event => {
     const name = event.target.name;
@@ -14,9 +16,10 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Numbers in context</h1>
+      <Title />
       <Search handleChange={handleChange} />
       <Results searchTerms={searchTerms} />
+      <Footer />
     </div>
   );
 }

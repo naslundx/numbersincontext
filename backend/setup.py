@@ -81,7 +81,7 @@ def fill_database(db_string = "example.db"):
     _run(db_string, """
         INSERT INTO unit(shortname, name, unittypeid, conversion)
         VALUES 
-            ('n/a', 'none', 1, 1),
+            ('none', 'none', 1, 1),
 
             ('km', 'kilometer', 2, 1000),
             ('m', 'meter', 2, 1),

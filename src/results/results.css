@@ -1,0 +1,10 @@
+.result {
+    width: 80%;
+    margin: 5px auto;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+.result * {
+    font-size: larger;
+}

@@ -1,0 +1,26 @@
+.search {
+    width: 80%;
+    margin: 5px auto;
+    border-radius: 0px;
+}
+
+.search>div {
+    margin: 0 auto;
+    width: fit-content;
+}
+
+.search>div>* {
+    margin: 0 10px;
+    font-size: x-large;
+}
+
+.search input {
+    width: 100%;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.search select {
+    width: 100%;
+    margin: 0;
+}

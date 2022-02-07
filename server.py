@@ -13,12 +13,16 @@ def lookup():
     if not value:
         return "", 400
         
-    unit = request.args.get('unit', default=None, type=str)
+    unit = request.args.get('unit', type=str) or 'none'
     category = request.args.get('category', default=None, type=str)
 
     db = Database()
-    (unitid, unittypeid), categoryid = db.to_unitid(unit), db.to_categoryid(category)
+    unit_data, categoryid = db.to_unitid(unit), db.to_categoryid(category)
 
+    if not unit_data:
+        return "", 400
+        
+    unitid, unittypeid = unit_data
     result = search(value, unitid, unittypeid, categoryid)
     return json.dumps(result)
 
