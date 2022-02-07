@@ -3,7 +3,9 @@ import os
 from flask import Flask, render_template, request
 from backend import Database, search
 
+
 app = Flask(__name__, static_folder="build/static", template_folder="build")
+
 
 @app.get("/api/lookup")
 def lookup():
@@ -14,7 +16,10 @@ def lookup():
     unit = request.args.get('unit', default=None, type=str)
     category = request.args.get('category', default=None, type=str)
 
-    result = search(value, unit, category)
+    db = Database()
+    (unitid, unittypeid), categoryid = db.to_unitid(unit), db.to_categoryid(category)
+
+    result = search(value, unitid, unittypeid, categoryid)
     return json.dumps(result)
 
 

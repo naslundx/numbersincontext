@@ -5,17 +5,10 @@ import Results from '../results'
 
 function App() {
   const [searchTerms, setSearchTerms] = useState({value: '', unit: '1'});
- 
-  // const handleChange = useCallback(event => {
-  //   setSearchTerms({value: event.target.value});
-  // }, []);
 
   const handleChange = useCallback(event => {
     const name = event.target.name;
     const value = event.target.value;
-
-    console.log(name, value);
-
     setSearchTerms(s => ({...s, [name]: value}));
   }, []);
 
