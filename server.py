@@ -9,19 +9,19 @@ app = Flask(__name__, static_folder="build/static", template_folder="build")
 
 @app.get("/api/lookup")
 def lookup():
-    value = request.args.get('value', type=int)
+    value = request.args.get("value", type=int)
     if not value:
         return "", 400
-        
-    unit = request.args.get('unit', type=str) or 'none'
-    category = request.args.get('category', default=None, type=str)
+
+    unit = request.args.get("unit", type=str) or "none"
+    category = request.args.get("category", default=None, type=str)
 
     db = Database()
     unit_data, categoryid = db.to_unitid(unit), db.to_categoryid(category)
 
     if not unit_data:
         return "", 400
-        
+
     unitid, unittypeid = unit_data
     result = search(value, unitid, unittypeid, categoryid)
     return json.dumps(result)
@@ -30,13 +30,18 @@ def lookup():
 @app.get("/api/units")
 def get_units():
     db = Database()
-    return json.dumps([{'id': row[0], 'shortname': row[1], 'name': row[2], 'type': row[3]} for row in db.get_units])
+    return json.dumps(
+        [
+            {"id": row[0], "shortname": row[1], "name": row[2], "type": row[3]}
+            for row in db.get_units
+        ]
+    )
 
 
 @app.get("/api/unittypes")
 def get_unittypes():
     db = Database()
-    return json.dumps([{'id': row[0], 'name': row[1]} for row in db.get_unittypes])
+    return json.dumps([{"id": row[0], "name": row[1]} for row in db.get_unittypes])
 
 
 @app.get("/")

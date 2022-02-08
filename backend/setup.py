@@ -1,5 +1,6 @@
 import sqlite3
 
+
 def _run(db_string, cmd):
     con = sqlite3.connect(db_string)
     cur = con.cursor()
@@ -15,7 +16,7 @@ def _get(db_string, cmd):
     return result
 
 
-def delete_database(db_string = "example.db"):
+def delete_database(db_string="example.db"):
     _run(db_string, "DROP TABLE IF EXISTS unit")
     _run(db_string, "DROP TABLE IF EXISTS unittype")
     _run(db_string, "DROP TABLE IF EXISTS category")
@@ -23,15 +24,20 @@ def delete_database(db_string = "example.db"):
     _run(db_string, "DROP TABLE IF EXISTS numbercategories")
 
 
-def setup_database(db_string = "example.db"):
-    _run(db_string, """
+def setup_database(db_string="example.db"):
+    _run(
+        db_string,
+        """
         CREATE TABLE unittype(
             rowid INTEGER PRIMARY KEY,
             name TEXT NOT NULL UNIQUE
         );
-    """)
+    """,
+    )
 
-    _run(db_string, """
+    _run(
+        db_string,
+        """
         CREATE TABLE unit(
             rowid INTEGER PRIMARY KEY,
             shortname TEXT NOT NULL UNIQUE,
@@ -40,17 +46,23 @@ def setup_database(db_string = "example.db"):
             conversion REAL NOT NULL,
             FOREIGN KEY (unittypeid) REFERENCES unittype(rowid)
         );
-    """)
+    """,
+    )
 
-    _run(db_string, """
+    _run(
+        db_string,
+        """
         CREATE TABLE category(
             rowid INTEGER PRIMARY KEY,
             name TEXT NOT NULL UNIQUE,
             description TEXT
         );
-    """)
+    """,
+    )
 
-    _run(db_string, """
+    _run(
+        db_string,
+        """
         CREATE TABLE number(
             rowid INTEGER PRIMARY KEY,
             value INTEGER NOT NULL,
@@ -59,9 +71,12 @@ def setup_database(db_string = "example.db"):
             FOREIGN KEY (unittypeid) REFERENCES unittype(rowid),
             UNIQUE (value, unittypeid)
         );
-    """)
+    """,
+    )
 
-    _run(db_string, """
+    _run(
+        db_string,
+        """
         CREATE TABLE numbercategories(
             categoryid INTEGER NOT NULL,
             numberid INTEGER NOT NULL,
@@ -69,16 +84,26 @@ def setup_database(db_string = "example.db"):
             FOREIGN KEY (numberid) REFERENCES number(rowid),
             UNIQUE (categoryid, numberid)
         );
-    """)
+    """,
+    )
 
 
-def fill_database(db_string = "example.db"):
-    _run(db_string, """
+def fill_database(db_string="example.db"):
+    _run(
+        db_string,
+        """
         INSERT INTO unittype(name)
-        VALUES ('none'), ('distance'), ('time');
-    """)
+        VALUES 
+            ('none'), 
+            ('distance'), 
+            ('time'), 
+            ('temperature');
+    """,
+    )
 
-    _run(db_string, """
+    _run(
+        db_string,
+        """
         INSERT INTO unit(shortname, name, unittypeid, conversion)
         VALUES 
             ('none', 'none', 1, 1),
@@ -94,10 +119,15 @@ def fill_database(db_string = "example.db"):
             ('min', 'minute', 3, 60),
             ('hr', 'hour', 3, 3600),
             ('day', 'day', 3, 86400),
-            ('yr', 'year', 3, 31536000);
-    """)
+            ('yr', 'year', 3, 31536000),
 
-    _run(db_string, """
+            ('c', 'celsius', 4, 1);
+    """,
+    )
+
+    _run(
+        db_string,
+        """
         INSERT INTO number(value, unittypeid, description)
         VALUES 
             (11, 1, 'Number of players in a football team'),
@@ -117,4 +147,5 @@ def fill_database(db_string = "example.db"):
             (32, 1, 'Number of pieces on a chessboard'),
             (11700, 1, 'Years since last ice age'),
             (233, 1, 'Years since the French revolution');
-    """)
+    """,
+    )
