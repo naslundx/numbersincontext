@@ -142,13 +142,17 @@ def fill_database(db_string="example.db"):
             (888005, 1, 'Population of Cyprus'),
             (53686, 1, 'Population of Faroe Islands'),
             (825, 1, 'Population of Vatican City'),
-            (397000, 2, 'Distance between Stockholm and Göteborg'),
-            (64000, 2, 'Distance between Stockholm and Uppsala'),
-            (4.6, 2, 'Average length of a car'),
-            (1.77, 2, 'Average length of a human'),
             (32, 1, 'Number of pieces on a chessboard'),
             (11700, 1, 'Years since last ice age'),
-            (233, 1, 'Years since the French revolution');
+            (233, 1, 'Years since the French revolution'),
+
+            (1.77, 2, 'Average length of a human'),
+            (4.6, 2, 'Average length of a car'),
+            (381, 2, 'Height of Empire State Building'),
+            (64000, 2, 'Distance between Stockholm and Uppsala'),
+            (397000, 2, 'Distance between Stockholm and Göteborg'),
+            
+            (60*3, 3, 'Time of a Eurovision contest song');
     """,
     )
 
@@ -160,7 +164,8 @@ def fill_database(db_string="example.db"):
                 n.description AS description, 
                 n.value / u.conversion AS value, 
                 n.unittypeid AS unittypeid,
-                u.shortname AS unitshortname 
+                u.shortname AS unitshortname,
+                u.rowid AS unitid
             FROM 
                 number AS n, 
                 unit AS u 

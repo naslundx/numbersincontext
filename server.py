@@ -10,7 +10,7 @@ Database()
 
 @app.get("/api/lookup")
 def lookup():
-    value = request.args.get("value", type=int)
+    value = request.args.get("value", type=float)
     if not value:
         return "", 400
 

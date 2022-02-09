@@ -14,9 +14,12 @@ class Database:
         self.cur = self.con.cursor()
 
     def run(self, cmd):
-        print(cmd)
+        DEBUG = False
+        if DEBUG:
+            print(cmd)
         results = self.cur.execute(cmd).fetchall()
-        print(results)
+        if DEBUG:
+            print(results)
         return results
 
     @cached_property
@@ -65,13 +68,13 @@ class Database:
 
         return result[0][0] if result else None
 
-    def look_up(self, min_value, max_value=None, unittypeid=None, categoryid=None):
+    def look_up(self, min_value, max_value=None, unitid=None, unittypeid=None, categoryid=None):
         # TODO clean sql queries
 
         # TODO support categories
 
-        if unittypeid:
-            unit_filter = f"AND unittypeid = {unittypeid}"
+        if unitid and unittypeid and unittypeid > 1:
+            unit_filter = f"AND (unittypeid <> {unittypeid} OR unitid = {unitid})"
         else:
             unit_filter = ""
 

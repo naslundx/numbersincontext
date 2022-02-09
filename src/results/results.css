@@ -2,14 +2,26 @@
     width: 80%;
     padding: 5px;
     margin: 5px auto;
+    margin-bottom: 35px;
+    min-height: 40px;
+    max-width: 800px;
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
+}
+
+.result>p {
+    text-align: center;
+    font-size: large;
+    font-style: italic;
+    margin: 10px;
+    color: rgba(0, 0, 0, 0.5);
 }
 
 .resultitem {
     border: 1px solid gray;
     margin: 10px;
     padding: 10px;
+    background-color: rgba(255, 255, 255, 0.4);
 }
 
 .resultitem p:first-of-type {
@@ -18,4 +30,10 @@
 
 .resultitem p:last-of-type {
     font-size: larger;
+}
+
+@media only screen and (max-width: 600px) {
+    .result {
+        width: 95%;
+    }
 }

@@ -42,19 +42,19 @@ def search(original_value: int, unitid: int, unittypeid: int, categoryid: int):
     # Approximate near
     tolerance = 0.101
     low, high = value * (1 - tolerance), value * (1 + tolerance)
-    results_approximate = db.look_up(low, high)
+    results_approximate = db.look_up(low, high, unitid=unitid, unittypeid=unittypeid)
 
     # Double value
-    results_double = db.look_up(low * 2, high * 2)
+    results_double = db.look_up(low * 2, high * 2, unitid=unitid, unittypeid=unittypeid)
 
     # Half
-    results_half = db.look_up(low // 2, high // 2)
+    results_half = db.look_up(low // 2, high // 2, unitid=unitid, unittypeid=unittypeid)
 
     # === ORDER OF MAGNITUDE MATCHES ===
 
     order = math.floor(math.log10(value))
     low, high = 10 ** order, 10 ** (order + 1)
-    results_magnitude = db.look_up(low, high)
+    results_magnitude = db.look_up(low, high, unitid=unitid, unittypeid=unittypeid)
 
     # === COMPILATION ===
     # TODO update below and proper why depending on unit match
