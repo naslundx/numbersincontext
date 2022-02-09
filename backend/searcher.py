@@ -7,7 +7,8 @@ def remove_doubles(data):
     while idx < len(data):
         found = False
         for jdx in range(idx + 1, len(data)):
-            if data[idx]["value"] == data[jdx]["value"] and data[idx]["unit"] == data[jdx]["unit"]:
+            e, e2 = data[idx], data[jdx]
+            if e["value"] == e2["value"] and e["unit"] == e2["unit"] and e["score"] < e2["score"]:
                 data.pop(jdx)
                 found = True
                 break

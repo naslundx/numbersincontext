@@ -149,3 +149,11 @@ def fill_database(db_string="example.db"):
             (233, 1, 'Years since the French revolution');
     """,
     )
+
+    _run(
+        db_string,
+        """
+        CREATE TABLE number_computed AS
+            SELECT * FROM number;
+    """
+    )

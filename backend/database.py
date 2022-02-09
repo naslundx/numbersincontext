@@ -85,7 +85,7 @@ class Database:
 
         results = self.run(
             f"""
-            SELECT * FROM number WHERE {value_filter} {unit_filter};
+            SELECT * FROM number_computed WHERE {value_filter} {unit_filter};
         """
         )
 
