@@ -4,10 +4,11 @@ import "./results.css"
 
 const Results = ({ searchTerms }) => {
     const searchResults = useSearch(searchTerms);
+    const className = "result transparentbox" + (searchResults.length === 0 ? "" : " withcontent");
 
     return (
-        <div className="result transparentbox">
-            {searchResults.map(e => <ResultItem data={e} />)}
+        <div className={className}>
+            {searchResults.map(e => <ResultItem key={e.description} data={e} />)}
             {searchResults.length === 0 && <p>Enter a number...</p>}
         </div>
     )

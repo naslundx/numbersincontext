@@ -11,7 +11,7 @@ Database()
 @app.get("/api/lookup")
 def lookup():
     value = request.args.get("value", type=float)
-    if not value:
+    if not value or value < 0:
         return "", 400
 
     unit = request.args.get("unit", type=str) or "none"

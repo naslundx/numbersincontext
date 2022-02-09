@@ -2,7 +2,7 @@
     width: 80%;
     padding: 5px;
     margin: 5px auto;
-    margin-bottom: 35px;
+    margin-bottom: 50px;
     min-height: 40px;
     max-width: 800px;
     border-top-left-radius: 0px;
@@ -22,18 +22,49 @@
     margin: 10px;
     padding: 10px;
     background-color: rgba(255, 255, 255, 0.4);
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+}
+
+.resultitem .left {
+    flex: 2;
+    /* flex-basis: 100%; */
+}
+
+.resultitem .right {
+    flex: 1;
+    /* flex-basis: 100%; */
+}
+
+.resultitem .left {
+    text-align: right;
+    padding-right: 10px;
+}
+
+.resultitem .left h2 {
+    margin-bottom: 0.3rem;
 }
 
 .resultitem p:first-of-type {
     font-size: x-large;
 }
 
-.resultitem p:last-of-type {
-    font-size: larger;
+.resultitem p {
+    font-size: large;
 }
 
 @media only screen and (max-width: 600px) {
     .result {
         width: 95%;
+    }
+    .resultitem {
+        flex-direction: column;
+    }
+    .resultitem .left {
+        text-align: center;
+    }
+    .resultitem .right {
+        text-align: center;
     }
 }

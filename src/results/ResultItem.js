@@ -4,8 +4,15 @@ const ResultItem = ({ data }) => {
 
     return (
         <div className="resultitem">
-            <p><b>({data.why})</b>: {data.description}</p>
-            <p>{value} {unit} <i>(score: {data.score})</i></p>
+            <div className="left">
+                <h2>{data.description}</h2>
+                <b>({data.why})</b>
+            </div>
+            <div className="right">
+                <p>{value} {unit}</p>
+                <p>Error: {100 * data.relative_error.toFixed(2)}%</p>
+                {/* <p><i>(score: {data.score})</i></p> */}
+            </div>
         </div>
     )
 }

@@ -57,9 +57,6 @@ def search(original_value: int, unitid: int, unittypeid: int, categoryid: int):
     results_magnitude = db.look_up(low, high, unitid=unitid, unittypeid=unittypeid)
 
     # === COMPILATION ===
-    # TODO update below and proper why depending on unit match
-    # TODO convert to proper unit name
-    # TODO also include relative and absolute error
 
     results = []
 
@@ -70,14 +67,14 @@ def search(original_value: int, unitid: int, unittypeid: int, categoryid: int):
                 "description": r[0],
                 "value": float(r[1]),
                 "unit": r[3],
-                "why": "Exact match (unit or not)",  # TODO
+                "why": "Exact match",  # TODO check unit
             }
         )
 
     for r in results_approximate:
         results.append(
             {
-                "score": 10,  # TODO compute score properly (related to distance)
+                "score": 10,
                 "description": r[0],
                 "value": float(r[1]),
                 "unit": r[3],
@@ -88,35 +85,43 @@ def search(original_value: int, unitid: int, unittypeid: int, categoryid: int):
     for r in results_double:
         results.append(
             {
-                "score": 12,  # TODO compute score properly (related to distance)
+                "score": 12,
                 "description": r[0],
                 "value": float(r[1]),
                 "unit": r[3],
-                "why": "Double",
+                "why": "Half of",
             }
         )
 
     for r in results_half:
         results.append(
             {
-                "score": 13,  # TODO compute score properly (related to distance)
+                "score": 13,
                 "description": r[0],
                 "value": float(r[1]),
                 "unit": r[3],
-                "why": "Half",
+                "why": "Double of",
             }
         )
 
     for r in results_magnitude:
         results.append(
             {
-                "score": 20,  # TODO compute score properly (related to distance)
+                "score": 20,
                 "description": r[0],
                 "value": float(r[1]),
                 "unit": r[3],
                 "why": "Same order of magnitude",
             }
         )
+
+    for r in results:
+        # TODO error depends on type - double/half are off
+        absolute_error = abs(r["value"] - value)
+        relative_error = absolute_error / value
+        r["absolute_error"] = round(absolute_error, 2)
+        r["relative_error"] = round(relative_error, 2)
+        r["score"] = round(r["score"] + relative_error, 2)
 
     # === FINISH ===
 
