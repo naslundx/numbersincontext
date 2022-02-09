@@ -6,7 +6,10 @@ const encodeGetParams = p => Object.entries(p).map(kv => kv.map(encodeURICompone
 const useSearch = params => {
     const [results, call] = useApi("/api/lookup?" + encodeGetParams(params));
 
-    useEffect(call, [call]);
+    useEffect(() => {
+        const timer = setTimeout(() => call(), 750);
+        return () => clearTimeout(timer);
+    }, [call]);
 
     /*
     const results = [

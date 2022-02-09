@@ -66,17 +66,19 @@ def search(original_value: int, unitid: int, unittypeid: int, categoryid: int):
                 "score": 0,
                 "description": r[0],
                 "value": float(r[1]),
+                "unittypeid": int(r[2]),
                 "unit": r[3],
-                "why": "Exact match",  # TODO check unit
+                "why": "Exact match",
             }
         )
 
     for r in results_approximate:
         results.append(
             {
-                "score": 10,
+                "score": 2,
                 "description": r[0],
                 "value": float(r[1]),
+                "unittypeid": int(r[2]),
                 "unit": r[3],
                 "why": "Approximate match",
             }
@@ -85,9 +87,10 @@ def search(original_value: int, unitid: int, unittypeid: int, categoryid: int):
     for r in results_double:
         results.append(
             {
-                "score": 12,
+                "score": 3,
                 "description": r[0],
                 "value": float(r[1]),
+                "unittypeid": int(r[2]),
                 "unit": r[3],
                 "why": "Half of",
             }
@@ -96,9 +99,10 @@ def search(original_value: int, unitid: int, unittypeid: int, categoryid: int):
     for r in results_half:
         results.append(
             {
-                "score": 13,
+                "score": 3,
                 "description": r[0],
                 "value": float(r[1]),
+                "unittypeid": int(r[2]),
                 "unit": r[3],
                 "why": "Double of",
             }
@@ -107,21 +111,29 @@ def search(original_value: int, unitid: int, unittypeid: int, categoryid: int):
     for r in results_magnitude:
         results.append(
             {
-                "score": 20,
+                "score": 6,
                 "description": r[0],
                 "value": float(r[1]),
+                "unittypeid": int(r[2]),
                 "unit": r[3],
                 "why": "Same order of magnitude",
             }
         )
 
+    idx = -1
     for r in results:
         # TODO error depends on type - double/half are off
+        idx += 1
         absolute_error = abs(r["value"] - value)
-        relative_error = absolute_error / value
+        relative_error = absolute_error / max(value, r["value"])
+        unittype_penalty = 1
+        if r["unit"] != "none":
+            unittype_penalty = 0 if r["unittypeid"] == unittypeid else 3
+
         r["absolute_error"] = round(absolute_error, 2)
         r["relative_error"] = round(relative_error, 2)
-        r["score"] = round(r["score"] + relative_error, 2)
+        r["score"] = round(r["score"] + relative_error + unittype_penalty, 2)
+        r["id"] = idx
 
     # === FINISH ===
 

@@ -8,7 +8,7 @@ const Results = ({ searchTerms }) => {
 
     return (
         <div className={className}>
-            {searchResults.map(e => <ResultItem key={e.description} data={e} />)}
+            {searchResults.map(e => <ResultItem key={e.id} data={e} />)}
             {searchResults.length === 0 && <p>Enter a number...</p>}
         </div>
     )
