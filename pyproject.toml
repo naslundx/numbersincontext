@@ -71,6 +71,7 @@ exclude = '''
         'trailing-whitespace', 
         'fixme',
         'too-many-locals',
+        'too-many-arguments',
         'unused-argument',
         'import-error'
     ]
