@@ -26,11 +26,11 @@ def search(original_value: int, unitid: int, unittypeid: int, categoryid: int):
     db = Database()
 
     # Convert to proper SI unit
-    if unitid not in db.get_si_units:
-        factor = db.get_conversion_factor(unitid)
-        value = original_value * factor
-    else:
-        value = original_value
+    # if unitid not in db.get_si_units:
+    #     factor = db.get_conversion_factor(unitid)
+    #     value = original_value * factor
+    # else:
+    value = original_value
 
     # === EXACT MATCHES ===
 
@@ -67,9 +67,9 @@ def search(original_value: int, unitid: int, unittypeid: int, categoryid: int):
         results.append(
             {
                 "score": 0,
-                "value": int(r[1]),
-                "unit": r[2],  # TODO convert to proper unit name
-                "description": r[3],
+                "description": r[0],
+                "value": float(r[1]),
+                "unit": r[3],
                 "why": "Exact match (unit or not)",  # TODO
             }
         )
@@ -78,9 +78,9 @@ def search(original_value: int, unitid: int, unittypeid: int, categoryid: int):
         results.append(
             {
                 "score": 10,  # TODO compute score properly (related to distance)
-                "value": int(r[1]),
-                "unit": r[2],  # TODO convert to proper unit name
-                "description": r[3],
+                "description": r[0],
+                "value": float(r[1]),
+                "unit": r[3],
                 "why": "Approximate match",
             }
         )
@@ -89,9 +89,9 @@ def search(original_value: int, unitid: int, unittypeid: int, categoryid: int):
         results.append(
             {
                 "score": 12,  # TODO compute score properly (related to distance)
-                "value": int(r[1]),
-                "unit": r[2],  # TODO convert to proper unit name
-                "description": r[3],
+                "description": r[0],
+                "value": float(r[1]),
+                "unit": r[3],
                 "why": "Double",
             }
         )
@@ -100,9 +100,9 @@ def search(original_value: int, unitid: int, unittypeid: int, categoryid: int):
         results.append(
             {
                 "score": 13,  # TODO compute score properly (related to distance)
-                "value": int(r[1]),
-                "unit": r[2],  # TODO convert to proper unit name
-                "description": r[3],
+                "description": r[0],
+                "value": float(r[1]),
+                "unit": r[3],
                 "why": "Half",
             }
         )
@@ -111,9 +111,9 @@ def search(original_value: int, unitid: int, unittypeid: int, categoryid: int):
         results.append(
             {
                 "score": 20,  # TODO compute score properly (related to distance)
-                "value": int(r[1]),
-                "unit": r[2],  # TODO convert to proper unit name
-                "description": r[3],
+                "description": r[0],
+                "value": float(r[1]),
+                "unit": r[3],
                 "why": "Same order of magnitude",
             }
         )

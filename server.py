@@ -5,6 +5,7 @@ from backend import Database, search
 
 
 app = Flask(__name__, static_folder="build/static", template_folder="build")
+Database()
 
 
 @app.get("/api/lookup")

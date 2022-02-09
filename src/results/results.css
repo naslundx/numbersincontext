@@ -1,10 +1,21 @@
 .result {
     width: 80%;
+    padding: 5px;
     margin: 5px auto;
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
 }
 
-.result * {
+.resultitem {
+    border: 1px solid gray;
+    margin: 10px;
+    padding: 10px;
+}
+
+.resultitem p:first-of-type {
+    font-size: x-large;
+}
+
+.resultitem p:last-of-type {
     font-size: larger;
 }

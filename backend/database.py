@@ -70,9 +70,6 @@ class Database:
 
         # TODO support categories
 
-        # TODO Also search through "understandable" units, all converted
-        # should be possible with a neat sql query
-
         if unittypeid:
             unit_filter = f"AND unittypeid = {unittypeid}"
         else:

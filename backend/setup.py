@@ -142,8 +142,10 @@ def fill_database(db_string="example.db"):
             (888005, 1, 'Population of Cyprus'),
             (53686, 1, 'Population of Faroe Islands'),
             (825, 1, 'Population of Vatican City'),
-            (397, 1, 'Distance between Stockholm and Göteborg in KM'),
-            (64, 1, 'Distance between Stockholm and Uppsala in KM'),
+            (397000, 2, 'Distance between Stockholm and Göteborg'),
+            (64000, 2, 'Distance between Stockholm and Uppsala'),
+            (4.6, 2, 'Average length of a car'),
+            (1.77, 2, 'Average length of a human'),
             (32, 1, 'Number of pieces on a chessboard'),
             (11700, 1, 'Years since last ice age'),
             (233, 1, 'Years since the French revolution');
@@ -154,6 +156,15 @@ def fill_database(db_string="example.db"):
         db_string,
         """
         CREATE TABLE number_computed AS
-            SELECT * FROM number;
-    """
+            SELECT 
+                n.description AS description, 
+                n.value / u.conversion AS value, 
+                n.unittypeid AS unittypeid,
+                u.shortname AS unitshortname 
+            FROM 
+                number AS n, 
+                unit AS u 
+            WHERE 
+                n.unittypeid = u.unittypeid;
+    """,
     )

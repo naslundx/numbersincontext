@@ -2,8 +2,12 @@ import useSearch from "../hooks/useSearch"
 import "./results.css"
 
 const ResultItem = ({ data }) => {
+    console.log(data);
     return (
-        <p><b>{data.why}</b>: {data.description}</p>
+        <div className="resultitem">
+            <p><b>({data.why})</b>: {data.description}</p>
+            <p>{data.value.toFixed(2)} {data.unit} <i>(score: {data.score})</i></p>
+        </div>
     )
 }
 
