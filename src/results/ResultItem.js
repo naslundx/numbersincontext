@@ -10,7 +10,7 @@ const ResultItem = ({ data }) => {
             </div>
             <div className="right">
                 <p>{value} {unit}</p>
-                <p>Error: {100 * data.relative_error.toFixed(2)}%</p>
+                <p>Error: {(100 * data.relative_error).toFixed(2)}%</p>
                 {/* <p><i>(score: {data.score})</i></p> */}
             </div>
         </div>
