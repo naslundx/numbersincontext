@@ -7,10 +7,10 @@ const Results = ({ searchTerms }) => {
     const className = "result transparentbox" + (searchResults.length === 0 ? "" : " withcontent");
 
     return (
-        <div className={className}>
+        <section className={className}>
             {searchResults.map(e => <ResultItem key={e.id} data={e} />)}
             {searchResults.length === 0 && <p>Enter a number...</p>}
-        </div>
+        </section>
     )
 }
 

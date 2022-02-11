@@ -5,6 +5,13 @@
     max-width: 800px;
 }
 
+.search>p {
+    text-align: center;
+    width: 95%;
+    margin: 0 auto;
+    margin-bottom: 18px;
+}
+
 .search>div {
     margin: 0 auto;
     width: fit-content;
